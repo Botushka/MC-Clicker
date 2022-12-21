@@ -1,0 +1,8 @@
+name: MCCLICKER
+version: '${project.version}'
+main: me.jaromir.mcclicker.MCCLICKER
+api-version: 1.19
+
+commands:
+  gui:
+    description: open the cookie clicker gui
