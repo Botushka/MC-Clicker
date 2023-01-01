@@ -28,6 +28,15 @@ public class GUICommand extends Upgrades {
         ItemStack orphan = new ItemStack(Material.TOTEM_OF_UNDYING);
         ItemStack Factory = new ItemStack(Material.PISTON);
         ItemStack cookie = new ItemStack(Material.COOKIE);
+        ItemStack lever = new ItemStack(Material.LEVER);
+
+        ItemMeta lever_meta = lever.getItemMeta();
+        lever_meta.setDisplayName(ChatColor.RED + "Extra Hand");
+        ArrayList<String> lever_lore = new ArrayList<>();
+        lever_lore.add(ChatColor.DARK_GREEN + "Your click power: " + count);
+        lever_meta.setLore(lever_lore);
+        lever.setItemMeta(lever_meta);
+        inv.setItem(22, lever);
 
         ItemMeta cookie_meta = cookie.getItemMeta();
         cookie_meta.setDisplayName(ChatColor.RED + "Extra Hand");

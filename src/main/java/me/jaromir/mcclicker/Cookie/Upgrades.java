@@ -9,9 +9,9 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 public class Upgrades implements Listener {
 
     public  int cookies = 0;
-    public int costShears = 25;
-    public int costTotem = 100;
-    public int costFactory = 650;
+    public int costShears = 24;
+    public int costTotem = 99;
+    public int costFactory = 649;
 
     public  int count = 1;
     public void addCookies(int amount) {
