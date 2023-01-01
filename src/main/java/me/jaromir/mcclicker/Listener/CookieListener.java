@@ -45,7 +45,7 @@ public class CookieListener extends GUICommand implements Listener {
         if (material.equals(Material.HONEY_BLOCK)) {
             e.setCancelled(true);
             cookies += count;
-            p.sendMessage("You now have " + cookies + " cookies!");
+            p.sendMessage(ChatColor.GOLD + "You now have " + ChatColor.YELLOW + cookies + ChatColor.GOLD + " cookies!");
         }
     }
 

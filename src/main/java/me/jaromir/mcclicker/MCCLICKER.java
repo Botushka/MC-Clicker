@@ -15,6 +15,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class MCCLICKER extends JavaPlugin implements Listener {
 
+    /**
+     * TODO: Database
+     * */
     @Override
     public void onEnable() {
         // Plugin startup logic
