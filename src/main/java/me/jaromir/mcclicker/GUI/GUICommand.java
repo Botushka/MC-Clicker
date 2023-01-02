@@ -1,7 +1,5 @@
 package me.jaromir.mcclicker.GUI;
 
-import me.jaromir.mcclicker.Cookie.Upgrades;
-import me.jaromir.mcclicker.Listener.CookieListener;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -10,15 +8,18 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 
-public class GUICommand extends Upgrades {
+import static me.jaromir.mcclicker.Listener.CookieListener.*;
+
+public class GUICommand {
 
     private Inventory inv;
 
-
+    /**
+     * /////////////////// COOKIE CLICKER GUI /////////////
+     */
     public void openNewGUI(Player p) {
         inv = Bukkit.createInventory(null, 27, ChatColor.GOLD + "Cookie Clicker - Upgardes");
         for (int slot = 0; slot < inv.getSize(); slot++) {
@@ -29,9 +30,18 @@ public class GUICommand extends Upgrades {
         ItemStack Factory = new ItemStack(Material.PISTON);
         ItemStack cookie = new ItemStack(Material.COOKIE);
         ItemStack lever = new ItemStack(Material.LEVER);
+        ItemStack leaf = new ItemStack(Material.JUNGLE_LEAVES);
+
+        ItemMeta leaf_meta = leaf.getItemMeta();
+        leaf_meta.setDisplayName(ChatColor.RED + "Styling");
+        ArrayList<String> leaf_lore = new ArrayList<>();
+        leaf_lore.add(ChatColor.DARK_GREEN + "Click to change the way how your GUI looks");
+        leaf_meta.setLore(leaf_lore);
+        leaf.setItemMeta(leaf_meta);
+        inv.setItem(26, leaf);
 
         ItemMeta lever_meta = lever.getItemMeta();
-        lever_meta.setDisplayName(ChatColor.RED + "Extra Hand");
+        lever_meta.setDisplayName(ChatColor.RED + "Click power");
         ArrayList<String> lever_lore = new ArrayList<>();
         lever_lore.add(ChatColor.DARK_GREEN + "Your click power: " + count);
         lever_meta.setLore(lever_lore);
@@ -39,7 +49,7 @@ public class GUICommand extends Upgrades {
         inv.setItem(22, lever);
 
         ItemMeta cookie_meta = cookie.getItemMeta();
-        cookie_meta.setDisplayName(ChatColor.RED + "Extra Hand");
+        cookie_meta.setDisplayName(ChatColor.RED + "Cookie counter");
         ArrayList<String> cookie_lore = new ArrayList<>();
         cookie_lore.add(ChatColor.DARK_GREEN + "Your cookies: " + cookies);
         cookie_meta.setLore(cookie_lore);
@@ -75,4 +85,9 @@ public class GUICommand extends Upgrades {
 
         p.openInventory(inv);
     }
+
+
+
+
+
 }

@@ -1,6 +1,5 @@
 package me.jaromir.mcclicker.Listener;
 
-import me.jaromir.mcclicker.Cookie.Upgrades;
 import me.jaromir.mcclicker.GUI.GUICommand;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -12,13 +11,32 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.inventory.ItemStack;
 
 public class CookieListener extends GUICommand implements Listener {
 
+    public  static int cookies = 0;
+    public static int costShears = 25;
+    public static int costTotem = 100;
+    public static int costFactory = 650;
 
+    public static  int count = 1;
+    private void addCookies(int amount) {
+        count += amount;
+    }
+
+    private void UpgradeShears(int amount) {
+        cookies -= costShears;
+        costShears += amount * 3.5;
+    }
+    private void UpgradeTotem(int amount) {
+        cookies -= costTotem;
+        costTotem += amount * 3.5;
+    }
+    private void UpgradeFactory(int amount) {
+        cookies -= costFactory;
+        costFactory += amount * 3.5;
+    }
     @EventHandler
     public void onRightclick(PlayerInteractEvent e){
         Action action =  e.getAction();
@@ -29,6 +47,54 @@ public class CookieListener extends GUICommand implements Listener {
                 openNewGUI(player);
             }
         }
+    }
+
+    @EventHandler
+    public void clickEvent(InventoryClickEvent e){
+        Player player = (Player) e.getWhoClicked();
+
+        if(e.getView().getTitle().equals(ChatColor.GOLD + "Cookie Clicker - Upgardes")){
+            switch(e.getCurrentItem().getType()){
+                case SHEARS:
+                    if(cookies >= costShears) {
+                        player.sendMessage("Clicking power increased by 2");
+                        addCookies(2);
+                        UpgradeShears(24);
+                        player.sendMessage(ChatColor.GOLD + "sheers upgrade costs now " + ChatColor.YELLOW + costShears + ChatColor.GOLD + " cookies");
+                        openNewGUI(player);
+                        break;
+                    }else{
+                        player.sendMessage("You don't have enough cookies!");
+                        break;
+                    }
+                case TOTEM_OF_UNDYING:
+                    if(cookies >= costTotem) {
+                        player.sendMessage("Clicking power increased by 15");
+                        addCookies(15);
+                        UpgradeTotem(100);
+                        player.sendMessage(ChatColor.GOLD + "Factory upgrade costs now " + ChatColor.YELLOW + costTotem + ChatColor.GOLD + " cookies");
+                        openNewGUI(player);
+                        break;
+                    }else{
+                        player.sendMessage("You dont have enough cookies!");
+                        break;
+                    }
+                case PISTON:
+                    if(cookies >= costFactory) {
+                        player.sendMessage("Clicking power increased by 50");
+                        addCookies(100);
+                        UpgradeFactory(649);
+                        player.sendMessage(ChatColor.GOLD + "Factory upgrade costs now " + ChatColor.YELLOW + costFactory + ChatColor.GOLD + " cookies");
+                        openNewGUI(player);
+                        break;
+                    }else{
+                        player.sendMessage("You don't have enough cookies!");
+                        break;
+                    }
+            }
+
+            e.setCancelled(true);
+        }else;
     }
 
 
