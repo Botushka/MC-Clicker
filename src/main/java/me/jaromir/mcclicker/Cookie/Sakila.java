@@ -2,6 +2,10 @@ package me.jaromir.mcclicker.Cookie;
 
 public class Sakila {
 
+
+    /**
+     * player stats
+     * */
     public Sakila(String uuid, long cookies, long count) {
         this.uuid = uuid;
         this.cookies = cookies;
@@ -35,5 +39,7 @@ public class Sakila {
     public void setCount(long count) {
         this.count = count;
     }
+
+
 }
 

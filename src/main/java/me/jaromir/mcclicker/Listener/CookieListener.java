@@ -21,6 +21,10 @@ public class CookieListener extends GUICommand implements Listener {
         this.plugin = plugin;
     }
 
+    /**
+     * Cookie counter and gui work
+     * */
+
     private final MCCLICKER plugin;
 
 
