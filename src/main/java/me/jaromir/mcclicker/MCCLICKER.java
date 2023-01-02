@@ -1,37 +1,29 @@
 package me.jaromir.mcclicker;
-
-import me.jaromir.mcclicker.GUI.GUICommand;
+import me.jaromir.mcclicker.Cookie.Database;
 import me.jaromir.mcclicker.Listener.CookieListener;
-import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
-import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
+import java.sql.SQLException;
+
 
 public final class MCCLICKER extends JavaPlugin implements Listener {
-
-    /**
-     * TODO: Database
-     * */
+    private Database database;
     @Override
     public void onEnable() {
         // Plugin startup logic
         getServer().getPluginManager().registerEvents(this, this);
-        getServer().getPluginManager().registerEvents(new CookieListener(), this);
+        getServer().getPluginManager().registerEvents(new CookieListener(this), this);
+        try{
+            this.database = new Database();
+            database.initializeDatabase();
+        }catch(SQLException e){
+
+            System.out.println("Unable to connect to database and create tables.");
+            e.printStackTrace();
+        }
+        }
+
+    public Database getDatabase() {
+        return database;
     }
-
-    @Override
-    public void onDisable() {
-        // Plugin shutdown logic
-    }
-
-    /**
-     * -Default numbers for newcomers
-     */
-
 }

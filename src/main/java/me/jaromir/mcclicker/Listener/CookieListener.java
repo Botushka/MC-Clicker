@@ -1,6 +1,8 @@
 package me.jaromir.mcclicker.Listener;
 
+import me.jaromir.mcclicker.Cookie.Sakila;
 import me.jaromir.mcclicker.GUI.GUICommand;
+import me.jaromir.mcclicker.MCCLICKER;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -11,9 +13,16 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
+
 
 public class CookieListener extends GUICommand implements Listener {
+
+    public CookieListener(MCCLICKER plugin) {
+        this.plugin = plugin;
+    }
+
+    private final MCCLICKER plugin;
+
 
     public  static int cookies = 0;
     public static int costShears = 25;
@@ -106,7 +115,10 @@ public class CookieListener extends GUICommand implements Listener {
     public void onBreak(BlockBreakEvent e) {
         Block block = e.getBlock();
         Player p = e.getPlayer();
-        String uuid = p.getUniqueId().toString();
+        Sakila stats = this.plugin.getDatabase().findPlayerStatsByUUID(p.getUniqueId().toString());
+        if(stats == null){
+            stats = new MCCLICKER(p.getUniqueId().toString(), 0, 0);
+        }
         Material material = block.getType();
         if (material.equals(Material.HONEY_BLOCK)) {
             e.setCancelled(true);
